@@ -1,4 +1,3 @@
-
 -- Additional Plugins
 lvim.plugins = {
 
@@ -26,5 +25,8 @@ lvim.plugins = {
 		end,
 	},
 
-	-- UI
+	{ "catppuccin/nvim", as = "catppuccin" },
 }
+--UI
+--
+require("customConfigs.alpha")
