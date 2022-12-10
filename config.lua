@@ -62,18 +62,20 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 -- DEBUGGER
 lvim.builtin.dap.active = true
-local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
-pcall(function() require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python") end)
+local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+pcall(function()
+	require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
+end)
 
 local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
+	dapui.open()
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
+	dapui.close()
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
+	dapui.close()
 end
 
 -- CONFIGS FOR PLUGINS
@@ -87,18 +89,18 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
+	"bash",
+	"c",
+	"javascript",
+	"json",
+	"lua",
+	"python",
+	"typescript",
+	"tsx",
+	"css",
+	"rust",
+	"java",
+	"yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -108,9 +110,9 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- -- make sure server will always be installed even if the server is in skipped_servers list
 lvim.lsp.installer.setup.ensure_installed = {
-  "sumneko_lua",
-  "jsonls",
-  "ltex"
+	"sumneko_lua",
+	"jsonls",
+	"ltex",
 }
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
@@ -135,23 +137,22 @@ local words = { "Laboratorio" }
 -- local lspconfig = require "lspconfig"
 -- custom.plugins.lspconfig
 for word in io.open(path, "r"):lines() do
-  table.insert(words, word)
+	table.insert(words, word)
 end
 require("lvim.lsp.manager").setup("ltex", {
 
-  ltex = {
-    dictionary = {
-      ["es"] = words,
-    },
-    disabledRules = { ["es"] = { "SMART_QUOTES" } },
-    -- commands =  vim.json.decode("{ '\\label{}': 'ignore', '\\documentclass[]{}': 'ignore', '\\cite{}': 'dummy', '\\cite[]{}': 'dummy'}"),
-    additionalRules = {
-      enablePickyRules = true,
-      motherTongue = "es",
-    },
-    language = "es",
-  },
-
+	ltex = {
+		dictionary = {
+			["es"] = words,
+		},
+		disabledRules = { ["es"] = { "SMART_QUOTES" } },
+		-- commands =  vim.json.decode("{ '\\label{}': 'ignore', '\\documentclass[]{}': 'ignore', '\\cite{}': 'dummy', '\\cite[]{}': 'dummy'}"),
+		additionalRules = {
+			enablePickyRules = true,
+			motherTongue = "es",
+		},
+		language = "es",
+	},
 })
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
@@ -171,20 +172,21 @@ require("lvim.lsp.manager").setup("ltex", {
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { command = "black", filetypes = { "python" } },
-  --   { command = "isort", filetypes = { "python" } },
-  --   {
-  --     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-  --     command = "prettier",
-  --     ---@usage arguments to pass to the formatter
-  --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-  --     extra_args = { "--print-with", "100" },
-  --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-  --     filetypes = { "typescript", "typescriptreact" },
-  --   },
-}
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{ command = "black", filetypes = { "python" } },
+	{ command = "stylua", filetypes = { "lua" } },
+	--   { command = "isort", filetypes = { "python" } },
+	--   {
+	--     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+	--     command = "prettier",
+	--     ---@usage arguments to pass to the formatter
+	--     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+	--     extra_args = { "--print-with", "100" },
+	--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+	--     filetypes = { "typescript", "typescriptreact" },
+	--   },
+})
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -206,24 +208,32 @@ formatters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-  { "lervag/vimtex" },
 
-  {
-    "phaazon/hop.nvim",
-    branch = "v2", -- optional but strongly recommended
-    config = function()
-      require("hop").setup()
-      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-    end,
-  },
+	-- LATEX
+	{ "lervag/vimtex" },
 
-  {
-    "mfussenegger/nvim-dap-python",
-    config = function()
-      require("dap-python").setup "~/.virtualenvs/debugpy/bin/python"
-    end,
-  }
+	-- FUNCIONALITY
+	{
+		"phaazon/hop.nvim",
+		branch = "v2", -- optional but strongly recommended
+		config = function()
+			require("hop").setup()
+			vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+			vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+		end,
+	},
+
+	{ "tpope/vim-surround" },
+
+	-- DEBUGGER
+	{
+		"mfussenegger/nvim-dap-python",
+		config = function()
+			require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+		end,
+	},
+
+  -- UI
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
