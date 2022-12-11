@@ -47,7 +47,7 @@ if status_ok then
 			{
 				type = "text",
 				val = banner,
-				opts = { position = "center", hl = "label" },
+				opts = { position = "center", hl = "function" },
 			},
 
 			{ type = "padding", val = 4 },
@@ -73,7 +73,7 @@ if status_ok then
 			{
 				type = "text",
 				val = bannerCoramDeo,
-				opts = { position = "center", hl = "label" },
+				opts = { position = "center", hl = "function" },
 			},
 		},
 	}
