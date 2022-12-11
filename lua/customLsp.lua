@@ -22,10 +22,19 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ltex" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- Words for vimtex
 local path = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add"
+-- local dictionaryEnglish = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add"
 local words = { "Laboratorio" }
-for word in io.open(path, "r"):lines() do
-	table.insert(words, word)
+
+local dictionaries = {
+	path = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add",
+	dictionaryEnglish = "/Users/charlie/.config/lvim/lua/dictionaries/english.txt",
+}
+for _, value in pairs(dictionaries) do
+	for word in io.open(value, "r"):lines() do
+		table.insert(words, word)
+	end
 end
+
 require("lvim.lsp.manager").setup("ltex", {
 	settings = {
 		ltex = {
