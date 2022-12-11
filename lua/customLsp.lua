@@ -1,4 +1,3 @@
-
 lvim.lsp.installer.setup.ensure_installed = {
 	"sumneko_lua",
 	"jsonls",
@@ -18,30 +17,29 @@ lvim.lsp.installer.setup.ensure_installed = {
 
 -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ltex" })
+vim.list_extend(lvim.lsp.override, { "ltex" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ltex" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
---
 -- Words for vimtex
-local path = "/Users/charlie/.config/nvim/lua/spellfiles/es.utf-8.add"
+local path = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add"
 local words = { "Laboratorio" }
--- local lspconfig = require "lspconfig"
--- custom.plugins.lspconfig
 for word in io.open(path, "r"):lines() do
 	table.insert(words, word)
 end
 require("lvim.lsp.manager").setup("ltex", {
-
-	ltex = {
-		dictionary = {
-			["es"] = words,
+	settings = {
+		ltex = {
+			dictionary = {
+				["es"] = words,
+			},
+			disabledRules = { ["es"] = { "SMART_QUOTES" } },
+			-- commands =  vim.json.decode("{ '\\label{}': 'ignore', '\\documentclass[]{}': 'ignore', '\\cite{}': 'dummy', '\\cite[]{}': 'dummy'}"),
+			additionalRules = {
+				enablePickyRules = true,
+				motherTongue = "es",
+			},
+			language = "es",
 		},
-		disabledRules = { ["es"] = { "SMART_QUOTES" } },
-		-- commands =  vim.json.decode("{ '\\label{}': 'ignore', '\\documentclass[]{}': 'ignore', '\\cite{}': 'dummy', '\\cite[]{}': 'dummy'}"),
-		additionalRules = {
-			enablePickyRules = true,
-			motherTongue = "es",
-		},
-		language = "es",
 	},
 })
 
@@ -60,4 +58,3 @@ require("lvim.lsp.manager").setup("ltex", {
 --   --Enable completion triggered by <c-x><c-o>
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
-
