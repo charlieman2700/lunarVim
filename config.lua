@@ -10,12 +10,11 @@ an executable
 
 require "customOptions"
 require "customMappings"
-require "plugins"
+require "customPlugins"
 require "debug.init"
 require "customLsp"
 require "customFormatters"
 require "customLinters"
-
 
 -- Change theme settings
 -- lvim.builtin.theme.options.dim_inactive = true

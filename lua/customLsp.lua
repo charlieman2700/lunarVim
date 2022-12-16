@@ -2,6 +2,7 @@ lvim.lsp.installer.setup.ensure_installed = {
 	"sumneko_lua",
 	"jsonls",
 	"ltex",
+	"sourcery",
 }
 -- -- change UI setting of `LspInstallInfo`
 -- -- see <https://github.com/williamboman/nvim-lsp-installer#default-configuration>
@@ -17,11 +18,10 @@ lvim.lsp.installer.setup.ensure_installed = {
 
 -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-vim.list_extend(lvim.lsp.override, { "ltex" })
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ltex" })
+vim.list_extend(lvim.lsp.override, { "ltex", "sourcery" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ltex" , "sourcery"})
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- Words for vimtex
-local path = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add"
 -- local dictionaryEnglish = "/Users/charlie/.config/lvim/lua/spellfiles/es.utf-8.add"
 local words = { "Laboratorio" }
 
@@ -52,6 +52,21 @@ require("lvim.lsp.manager").setup("ltex", {
 	},
 })
 
+require("lvim.lsp.manager").setup("sourcery", {
+	init_options = {
+		--- The Sourcery token for authenticating the user.
+		--- This is retrieved from the Sourcery website and must be
+		--- provided by each user. The extension must provide a
+		--- configuration option for the user to provide this value.
+		token = "user_VCDcHGTmv78ccEkuHNiDhecY1zuXdQ0uYOTp_ylVyg7TlDSmJ5mrGV3ze8I",
+
+		--- The extension's name and version as defined by the extension.
+		extension_version = "vim.lsp",
+
+		--- The editor's name and version as defined by the editor.
+		editor_version = "vim",
+	},
+})
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
 -- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)

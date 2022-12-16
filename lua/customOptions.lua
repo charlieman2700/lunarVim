@@ -34,6 +34,9 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 
+vim.g.vimtex_view_general_viewer = "open -a Preview"
+vim.g.vimtex_fold_enabled = 1
+vim.g.tex_flavor = "latex"
 
 
 

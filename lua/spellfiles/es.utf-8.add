@@ -3,3 +3,7 @@ impdp
 expdp
 metadatos
 _METADATA
+ARCHIVELOG
+RMAN
+DATAPUMP_EXP_FULL_DATABASE
+archivelog
