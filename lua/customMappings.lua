@@ -1,11 +1,15 @@
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+lvim.builtin.which_key.mappings["<space>"] = {
+	require("telescope.builtin").buffers,
+	"Select buffer",
+}
+-- vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 -- add your own keymapping
 lvim.keys.normal_mode["<C-'>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
-lvim.keys.normal_mode["<ESC>"] =  "<cmd> noh <CR>"
-
+lvim.keys.normal_mode["<ESC>"] = "<cmd> noh <CR>"
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["U"] = {
 	name = "Virtual Text",
