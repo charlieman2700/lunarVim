@@ -24,6 +24,8 @@ lvim.builtin.which_key.mappings["U"] = {
 	A = { "<cmd>lua vim.diagnostic.config({ virtual_text = true, underline = true, signs = true })<cr>", "All" },
 }
 
+-- vim.keymap.set('x', '<leader>pp',"\"_dP")
+-- vim.keymap.set('x', '<leader>pp',"\"_dP")
 -- unmap a default keymapping
 -- vim.keymap.del("n", "<C-Up>")
 -- override a default keymapping
@@ -46,3 +48,4 @@ lvim.builtin.which_key.mappings["U"] = {
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
+--

@@ -29,16 +29,6 @@ if status_ok then
     return b
   end
 
-  local text = require("lvim.interface.text")
-  local lvim_version = require("lvim.utils.git").get_lvim_version()
-
-  local footer = {
-    text.align_center({ width = 0 }, {
-      "",
-      "lunarvim.org",
-      lvim_version,
-    }, 0.5),
-  }
 
   lvim.builtin.alpha.dashboard.config = {
 
@@ -57,7 +47,7 @@ if status_ok then
         val = {
           button("f", lvim.icons.ui.FindFile .. "  Find File", "<CMD>Telescope find_files<CR>"),
           button("n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>"),
-          button("p", lvim.icons.ui.Project .. "  Projects ", "<CMD>Telescope projects<CR>"),
+          button("p", lvim.icons.ui.Project .. "  Projects ", "<CMD>SessionManager load_session<CR>"),
           button("r", lvim.icons.ui.History .. "  Recent files", ":Telescope oldfiles <CR>"),
           button("t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>"),
           button(

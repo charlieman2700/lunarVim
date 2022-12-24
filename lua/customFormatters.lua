@@ -3,6 +3,7 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
 	{ command = "black", filetypes = { "python" } },
 	{ command = "stylua", filetypes = { "lua" } },
+	{ command = "eslint_d", filetypes = { "typescriptreact", "typescript", "javascript", "javascriptreact" } },
 
 	-- INSTRUCTIONS
 	--   {

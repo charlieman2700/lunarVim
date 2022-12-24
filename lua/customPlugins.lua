@@ -54,7 +54,14 @@ lvim.plugins = {
 			require("customConfigs.gruvbox")
 		end,
 	},
+
+	{ "andersevenrud/nordic.nvim" },
+
+	{ "shaunsingh/moonlight.nvim" },
+	{ "christoomey/vim-tmux-navigator" },
 }
 --
 require("customConfigs.alpha")
 require("customConfigs.telescope")
+require("customConfigs.indent_blankline")
+require ('customConfigs.bufferLine')
